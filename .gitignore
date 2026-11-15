@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Data and models: handled by DVC, never by Git
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+models/
+*.pt
+*.onnx
+*.pth
+*.ckpt
+*.zip
+
+# MLflow / experiment outputs
+mlruns/
+mlartifacts/
+runs/
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/build/
+
+# Env and secrets
+.env
+*.key
+kaggle.json
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
