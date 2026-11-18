@@ -20,7 +20,7 @@ dvc-storagesign-language
 *.zip
 
 # MLflow / experiment outputs
-mlruns/
+
 mlartifacts/
 runs/
 

@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: asl_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models:ro        # mount model files (read-only)
+    environment:
+      - MODEL_PATH=models/best.onnx
+      - INPUT_SIZE=416
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.18.0
+    container_name: asl_mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/mlflow/mlruns
+    command: >
+      mlflow server
+      --backend-store-uri sqlite:////mlflow/mlruns/mlflow.db
+      --default-artifact-root /mlflow/mlruns/artifacts
+      --host 0.0.0.0
+      --port 5000
+    restart: unless-stopped
+
+networks:
+  default:
+    name: asl_network
