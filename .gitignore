@@ -13,8 +13,6 @@ data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 dvc-storagesign-language
-*.pt
-*.onnx
 *.pth
 *.ckpt
 *.zip
